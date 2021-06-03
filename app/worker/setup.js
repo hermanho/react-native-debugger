@@ -19,7 +19,7 @@ if (self.Blob && self.Blob.toString() === 'function Blob() { [native code] }') {
    * so add the reference here as react-native will not do it if the original is deleted
    */
   self.originalBlob = self.Blob;
-  delete self.Blob;
+  // delete self.Blob;
 }
 
 if (
@@ -39,5 +39,14 @@ if (self.fetch && self.fetch.toString() === 'function fetch() { [native code] }'
   self.__ORIGINAL_FETCH__ = self.fetch;
 }
 
+if (self.Headers && self.Headers.toString() === 'function Headers() { [native code] }') {
+  self.originalHeaders = self.Headers;
+}
+if (self.Request && self.Request.toString() === 'function Request() { [native code] }') {
+  self.originalRequest = self.Request;
+}
+if (self.Response && self.Response.toString() === 'function Response() { [native code] }') {
+  self.originalResponse = self.Response;
+}
 replaceForbiddenHeadersForWorkerXHR();
 addURIWarningForWorkerFormData();

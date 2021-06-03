@@ -1,5 +1,3 @@
-import getRNDebuggerFetchPolyfills from './polyfills/fetch';
-
 const isWorkerMethod = fn => String(fn).indexOf('[native code]') > -1;
 
 /* eslint-disable no-underscore-dangle */
@@ -42,11 +40,15 @@ export const toggleNetworkInspect = enabled => {
     ? self.originalXMLHttpRequest
     : self.XMLHttpRequest;
   self.FormData = self.originalFormData ? self.originalFormData : self.FormData;
-  const { fetch, Headers, Request, Response } = getRNDebuggerFetchPolyfills();
-  self.fetch = fetch;
-  self.Headers = Headers;
-  self.Request = Request;
-  self.Response = Response;
+  // const { fetch, Headers, Request, Response } = getRNDebuggerFetchPolyfills();
+  // self.fetch = fetch;
+  // self.Headers = Headers;
+  // self.Request = Request;
+  // self.Response = Response;
+  self.Headers = self.originalHeaders ? self.originalHeaders : self.Headers;
+  self.Request = self.originalRequest ? self.originalRequest : self.Request;
+  self.Response = self.originalResponse ? self.originalResponse : self.Response;
+  self.fetch = self.__ORIGINAL_FETCH__ ? self.__ORIGINAL_FETCH__ : self.fetch;
 
   console.log(
     '[RNDebugger]',
