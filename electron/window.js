@@ -104,6 +104,7 @@ export const createWindow = ({ iconPath, isPortSettingRequired, port }) => {
     tabbingIdentifier: 'rndebugger',
     webPreferences: {
       nodeIntegration: true,
+      enableRemoteModule: true,
     },
     ...config.windowBounds,
   });
